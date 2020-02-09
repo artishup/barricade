@@ -1,0 +1,1 @@
+# Prime - Hexagonal Architecture Skeleton

@@ -1,0 +1,37 @@
+version: "3.3"
+
+services:
+  db:
+    container_name: prime-mysql
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prime
+
+  nginx:
+    container_name: prime-nginx
+    build: docker/nginx
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - "88:80"
+    depends_on:
+      - db
+
+  php:
+    container_name: prime-php
+    build: docker/php
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html/app/public
+    command: php-fpm
+    links:
+      - db:db
+    ports:
+      - "9009:9000"
+    depends_on:
+      - db
