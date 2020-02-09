@@ -2,17 +2,17 @@ version: "3.3"
 
 services:
   db:
-    container_name: prime-mysql
+    container_name: barricade-mysql
     image: mysql:5.7
     restart: always
     ports:
       - "3309:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: prime
+      MYSQL_DATABASE: barricade
 
   nginx:
-    container_name: prime-nginx
+    container_name: barricade-nginx
     build: docker/nginx
     command: nginx -g "daemon off;"
     links:
@@ -23,7 +23,7 @@ services:
       - db
 
   php:
-    container_name: prime-php
+    container_name: barricade-php
     build: docker/php
     volumes:
       - ./:/var/www/html
