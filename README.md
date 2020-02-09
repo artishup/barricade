@@ -1,1 +1,1 @@
-# Prime - Hexagonal Architecture Skeleton
+# Barricade - Shopify Integration
