@@ -12,6 +12,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "lambdish/phunctional": "^2.0",
         "laravel/lumen-framework": "^6.0",
+        "league/tactician": "^1.0",
         "ramsey/uuid": "^3.9"
     },
     "require-dev": {

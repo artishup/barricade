@@ -79,6 +79,21 @@ $app->singleton(
 */
 
 $app->register(ArtishUp\Shopify\Order\Infrastructure\Providers\RepositoryServiceProvider::class);
+$app->register(ArtishUp\Shopify\Order\Infrastructure\Providers\CommandServiceProvider::class);
+
+
+/*
+|--------------------------------------------------------------------------
+| Command Bus
+|--------------------------------------------------------------------------
+*/
+
+League\Tactician\Setup\QuickStart::create(
+    [
+        ArtishUp\Shopify\Order\Application\Find\FindOrderCommand::class
+        => ArtishUp\Shopify\Order\Application\Find\FindOrderCommandHandler::class
+    ]
+);
 
 /*
 |--------------------------------------------------------------------------
