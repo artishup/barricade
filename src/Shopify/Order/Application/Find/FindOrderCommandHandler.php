@@ -6,6 +6,7 @@ namespace ArtishUp\Shopify\Order\Application\Find;
 
 use ArtishUp\Shopify\Order\Domain\ValueObject\OrderId;
 use ArtishUp\Shopify\Order\Domain\Repository\FindOrderRepository;
+use ArtishUp\Shopify\Store\Domain\Store;
 
 final class FindOrderCommandHandler
 {
@@ -16,11 +17,13 @@ final class FindOrderCommandHandler
         $this->findOrderRepository = $findOrderRepository;
     }
 
-    public function handle(FindOrderCommand $command)
+    public function __invoke(FindOrderCommand $command)
     {
         $orderId = OrderId::create($command->orderId());
 
-        $order = $this->findOrderRepository->find($orderId);
+        $store = Store::fromArray(config('shopify.store'));
+
+        $order = $this->findOrderRepository->find($store, $orderId);
 
         return FindOrderResponse::create($order);
     }

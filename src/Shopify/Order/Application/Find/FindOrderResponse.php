@@ -23,6 +23,8 @@ final class FindOrderResponse extends Response
 
     public function toArray(): array
     {
-        return $this->order->toArray();
+        return [
+            'order' => $this->order->toArray()
+        ];
     }
 }

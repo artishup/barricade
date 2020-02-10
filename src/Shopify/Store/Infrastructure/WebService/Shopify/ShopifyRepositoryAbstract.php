@@ -8,14 +8,14 @@ use GuzzleHttp\Client;
 
 abstract class ShopifyRepositoryAbstract
 {
-    private $client;
+    private Client $client;
 
     public function __construct()
     {
         $this->client = new Client();
     }
 
-    public function submit($url, $method, $params = null)
+    public function submit(string $url, string $method, array $params = null)
     {
         try {
             switch ($method) {
@@ -37,8 +37,7 @@ abstract class ShopifyRepositoryAbstract
 
             $result = [
                 'success' => $this->getStatus($statusCode),
-                'code' => $statusCode,
-                'response' => json_decode($res->getBody(), true)
+                'data'    => json_decode($res->getBody()->getContents(), true)
             ];
 
             return $result;
@@ -47,8 +46,8 @@ abstract class ShopifyRepositoryAbstract
 
             $result = [
                 'success' => $this->getStatus($statusCode),
-                'code' => $statusCode,
-                'response' => json_decode($e->getResponse()->getBody(), true)
+                'code'    => $statusCode,
+                'data'    => json_decode($e->getResponse()->getBody(), true)
             ];
 
             return $result;

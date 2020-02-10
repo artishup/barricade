@@ -25,6 +25,8 @@ $app = new Laravel\Lumen\Application(
 
 // $app->withEloquent();
 
+$app->configure('shopify');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -38,12 +40,12 @@ $app = new Laravel\Lumen\Application(
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Shared\Infrastructure\Exceptions\Handler::class
+    ArtishUp\Shared\Infrastructure\Exceptions\Handler::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    Shared\Presentation\Console\Kernel::class
+    ArtishUp\Shared\Presentation\Console\Kernel::class
 );
 
 /*
@@ -76,9 +78,7 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(ArtishUp\Shopify\Order\Infrastructure\Providers\RepositoryServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +93,7 @@ $app->singleton(
 
 $app->router->group([], function ($router) {
     require __DIR__. '/../src/Shared/Presentation/Http/routes.php';
+    require __DIR__. '/../src/Shopify/Order/Presentation/Http/routes.php';
 });
 
 return $app;
