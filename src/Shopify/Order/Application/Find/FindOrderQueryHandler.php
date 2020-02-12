@@ -8,7 +8,7 @@ use ArtishUp\Shopify\Order\Domain\ValueObject\OrderId;
 use ArtishUp\Shopify\Order\Domain\Repository\FindOrderRepository;
 use ArtishUp\Shopify\Store\Domain\Store;
 
-final class FindOrderCommandHandler
+final class FindOrderQueryHandler
 {
     private FindOrderRepository $findOrderRepository;
 
@@ -17,7 +17,7 @@ final class FindOrderCommandHandler
         $this->findOrderRepository = $findOrderRepository;
     }
 
-    public function __invoke(FindOrderCommand $command)
+    public function __invoke(FindOrderQuery $command)
     {
         $orderId = OrderId::create($command->orderId());
 

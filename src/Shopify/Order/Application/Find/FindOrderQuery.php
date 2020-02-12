@@ -6,7 +6,7 @@ namespace ArtishUp\Shopify\Order\Application\Find;
 
 use ArtishUp\Shared\Application\Command;
 
-class FindOrderCommand implements Command
+class FindOrderQuery implements Command
 {
     private string $orderId;
 

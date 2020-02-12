@@ -78,8 +78,8 @@ $app->singleton(
 |
 */
 
+$app->register(ArtishUp\Shared\Infrastructure\Providers\CommandBusProvider::class);
 $app->register(ArtishUp\Shopify\Order\Infrastructure\Providers\RepositoryServiceProvider::class);
-$app->register(ArtishUp\Shopify\Order\Infrastructure\Providers\CommandServiceProvider::class);
 
 
 /*
@@ -90,8 +90,8 @@ $app->register(ArtishUp\Shopify\Order\Infrastructure\Providers\CommandServicePro
 
 League\Tactician\Setup\QuickStart::create(
     [
-        ArtishUp\Shopify\Order\Application\Find\FindOrderCommand::class
-        => ArtishUp\Shopify\Order\Application\Find\FindOrderCommandHandler::class
+        ArtishUp\Shopify\Order\Application\Find\FindOrderQuery::class
+        => ArtishUp\Shopify\Order\Application\Find\FindOrderQueryHandler::class
     ]
 );
 
